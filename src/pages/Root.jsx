@@ -10,7 +10,7 @@ export default function Root() {
                 <nav>
                     <ul>
                         <li>
-                            <a href={`/pracice`}>pracice</a>
+                            <a href={`/practice`}>Practice</a>
                         </li>
                         <li>
                             <a href={`/learn`}>learn</a>

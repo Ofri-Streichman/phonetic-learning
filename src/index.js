@@ -13,8 +13,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/pracice",
+    path: "/practice",
     element: <Practice />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
