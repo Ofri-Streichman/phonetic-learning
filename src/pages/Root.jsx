@@ -1,20 +1,24 @@
-import React from "react";
-// import Header from "../components/Header";
-// import NavBar from "../components/NavBar";
-// import {
-//     Outlet,
-//     useLoaderData,
-//     Link
-// } from "react-router-dom";
-// import { getWeeks } from "./WeekList";
+export async function loader() {
+    return [{ name: "hello" }];
+}
 
-function Root() {
-
+export default function Root() {
     return (
         <>
-        <h1>Hello!</h1>
+            <div id="sidebar">
+                <h1>Hello</h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href={`/pracice`}>pracice</a>
+                        </li>
+                        <li>
+                            <a href={`/learn`}>learn</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="detail"></div>
         </>
     );
 }
-
-export default Root;

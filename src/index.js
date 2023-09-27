@@ -1,36 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import ErrorPage from "./pages/error-page.jsx";
 import Root from "./pages/Root.jsx";
-
+import ErrorPage from "./pages/error-page";
+import Practice from "./pages/Practice.jsx"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    // loader: rootLoader,
-    // children: [
-    //   {
-    //     path: "/Home",
-    //     element: <Home />,
-    //   },
-    //   {
-    //     path: "/Add",
-    //     element: <Add />,
-    //   },
-    //   {
-    //     path: "/WeekList",
-    //     element: <WeekList />,
-    //   },
-    //   {
-    //     path: "/weeks/:weekId/:englishWord",
-    //     element: <Card />,
-    //     loader: cardLoader,
-    //   },
-    // ],
+  },
+  {
+    path: "/pracice",
+    element: <Practice />,
   },
 ]);
 
