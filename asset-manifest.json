@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/phonetic-learning/static/css/main.e83a371c.css",
-    "main.js": "/phonetic-learning/static/js/main.12c50353.js",
+    "main.js": "/phonetic-learning/static/js/main.c8041635.js",
     "index.html": "/phonetic-learning/index.html",
     "main.e83a371c.css.map": "/phonetic-learning/static/css/main.e83a371c.css.map",
-    "main.12c50353.js.map": "/phonetic-learning/static/js/main.12c50353.js.map"
+    "main.c8041635.js.map": "/phonetic-learning/static/js/main.c8041635.js.map"
   },
   "entrypoints": [
     "static/css/main.e83a371c.css",
-    "static/js/main.12c50353.js"
+    "static/js/main.c8041635.js"
   ]
 }
