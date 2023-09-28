@@ -8,12 +8,17 @@ import Practice from "./pages/Practice.jsx"
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/phonetic-learning/",
     element: <Root />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/practice",
+    path: "/phonetic-learning/practice",
+    element: <Practice />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/phonetic-learning/learn",
     element: <Practice />,
     errorElement: <ErrorPage />,
   },
