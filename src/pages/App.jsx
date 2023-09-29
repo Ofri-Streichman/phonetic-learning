@@ -1,33 +1,50 @@
 import React, { Component } from 'react';
-// import { HashRouter, Route, Routes, Link } from "react-router-dom";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Home from './Home';
-import About from './Practice';
+import Learn from './Learn';
+import Practice from './Practice';
+
+import alphabet from '../phonetic_alphabet.json'
+
+function App(props) {
+  // console.log(alphabet);
 
 
-function App() {
-  return (
-    <>
-      <h1>My App</h1>
-      <RouterProvider router={router} />
-    </>
-  );
+  switch (props.page) {
+    case 'learn':
+      return (<>
+        <Learn alphabet={alphabet.dictionary} />
+      </>);
+    case 'practice':
+      return (<>
+        <Practice alphabet={alphabet.dictionary}/>
+      </>);
+    default:
+      return (
+        <>
+        </>
+      );
+  }
+  // return (
+  //   <>
+  //     <h1>My App</h1>
+  //     <Practice />
+  //   </>
+  // );
 }
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <About />,
-    // loader: rootLoader,
-    // children: [
-    //   {
-    //     path: "/Home",
-    //     element: <Home />,
-    //   }
-    // ],
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <Home />,
+//     errorElement: <About />,
+//     // loader: rootLoader,
+//     // children: [
+//     //   {
+//     //     path: "/Home",
+//     //     element: <Home />,
+//     //   }
+//     // ],
+//   },
+// ]);
 
 export default App;
