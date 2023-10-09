@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 
 import Learn from './Learn';
 import Practice from './Practice';
+import Test from './Test';
 
 import alphabet from '../phonetic_alphabet.json'
 
 function App(props) {
   // console.log(alphabet);
+  let maxLevel =5;
 
 
   switch (props.page) {
@@ -16,7 +18,11 @@ function App(props) {
       </>);
     case 'practice':
       return (<>
-        <Practice alphabet={alphabet.dictionary}/>
+        <Practice alphabet={alphabet.dictionary} maxLevel={maxLevel}/>
+      </>);
+    case 'test':
+      return (<>
+        <Test alphabet={alphabet.dictionary} />
       </>);
     default:
       return (

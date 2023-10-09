@@ -23,10 +23,13 @@ export default function Root() {
                 <nav>
                     <ul>
                         <li>
+                            <a onClick={() => loadPage(`learn`)}>Learn</a>
+                        </li>
+                        <li>
                             <a onClick={() => loadPage(`practice`)}>Practice</a>
                         </li>
                         <li>
-                            <a onClick={() => loadPage(`learn`)}>learn</a>
+                            <a onClick={() => loadPage(`test`)}>Test Yourself</a>
                         </li>
                     </ul>
                 </nav>
