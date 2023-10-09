@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import App from './App';
 
-
-
 export async function loader() {
     return [{ name: "hello" }];
 }
@@ -12,7 +10,6 @@ export default function Root() {
     const [page, setPage] = useState("/");
 
     function loadPage(x) {
-        console.log(x)
         setPage(x)
     }
 
@@ -23,7 +20,7 @@ export default function Root() {
                 <nav>
                     <ul>
                         <li>
-                            <a onClick={() => loadPage(`learn`)}>Learn</a>
+                            <a onClick={() => loadPage(`study`)}>Study</a>
                         </li>
                         <li>
                             <a onClick={() => loadPage(`practice`)}>Practice</a>
@@ -36,7 +33,6 @@ export default function Root() {
 
             </div>
             <App page={page} />
-            <div id="detail"></div>
         </>
     );
 }

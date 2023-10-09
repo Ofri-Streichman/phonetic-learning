@@ -398,15 +398,6 @@ i {
 }
 
 /* ----------------------------------- */
-#practice-page{
-  background-color: #eeb004;
-  display: flex;
-  flex-direction: column;
-}
-
-#practice-page >h1{
-  background-color: #3992ff;
-}
 
 .Card{
   display: flex;
@@ -424,7 +415,7 @@ i {
 }
 
 
-#test-page {
+#practice-page {
   background-color: #fff9e9;
   display: flex;
   flex-direction: column;
@@ -442,10 +433,6 @@ i {
   height: 12rem;
 }
 
-/* .Card.waiting {
-  background-color: #d1d1d1;
-} */
-
 .Card.correct {
   background-color: #6eed44b7;
 }
@@ -457,13 +444,14 @@ i {
 /* ---------------------------- */
 .flip-card {
   background-color: transparent;
-  width: 15rem;
-  height: 7.5rem;
+  width: 10rem;
+  height: 6rem;
   perspective: 1000px;
+  margin: 0.5rem;
 }
 
 .flip-card p{
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 
@@ -477,10 +465,6 @@ i {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: flex;
     flex-direction: column;
-    margin: 1rem;
-    padding: 1rem;
-    justify-content: center;
-    align-items: center;
     background-color: #e3e3e3;
 }
 
@@ -495,9 +479,32 @@ i {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flip-card-back {
   background-color: #6eed44b7;
   transform: rotateY(180deg);
+}
+
+/* ---------- */
+.study-container{
+  margin: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+}
+
+#study-page h1 {
+  margin-left: 2rem;
+  font-size:2.5rem;
+  margin-bottom: 0;
+}
+#study-page> p {
+  margin-left: 2rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0;
 }

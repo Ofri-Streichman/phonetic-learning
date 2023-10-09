@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import Card from "../components/Test-card"
+import Card from "../components/Test-card";
+import shortid, { generate } from 'shortid';
+
 
 function Test(props) {
     let alphabet = props.alphabet;
+    const shuffled = alphabet.sort(() => 0.5 - Math.random());
+
     const [current, setCurrent] = useState(randLetter());
     const [score, setScore] = useState(0);
     const [visualQue, setVisualQue] = useState('waiting'); // 'waiting', 'correct' or 'incorrect'
     const [text, setText] = useState(current.letter);
-
 
 
     function randLetter() {
@@ -40,9 +43,8 @@ function Test(props) {
     return (
         <div id="test-page">
             <h1>Test Yourself</h1>
-            <h2>Your Score: {score}</h2>
-            <div className='card-container'>
-                <Card text={text} visualQue={visualQue} checkInput={checkInput} />
+            <div className="study-container">
+                {shuffled.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
             </div>
         </div>
     )

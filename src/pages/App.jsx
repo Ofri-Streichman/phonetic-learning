@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Learn from './Learn';
+import Study from './Study';
 import Practice from './Practice';
 import Test from './Test';
 
@@ -12,9 +12,9 @@ function App(props) {
 
 
   switch (props.page) {
-    case 'learn':
+    case 'study':
       return (<>
-        <Learn alphabet={alphabet.dictionary} />
+        <Study alphabet={alphabet.dictionary} />
       </>);
     case 'practice':
       return (<>

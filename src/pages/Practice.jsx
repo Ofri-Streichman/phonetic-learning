@@ -1,37 +1,49 @@
 import React, { useState } from 'react';
-// import NumericInput from 'react-numeric-input';
-import shortid, { generate } from 'shortid';
-import LevelSelector from "../components/Level-selector"
-import Card from "../components/Study-card"
+import Card from "../components/Practice-card"
 
-function Study(props) {
+function Practice(props) {
     let alphabet = props.alphabet;
-    const [level, setLevel] = useState(1);
-    const [items, setItems] = useState(generateCards(level));
+    const [current, setCurrent] = useState(randLetter());
+    const [score, setScore] = useState(0);
+    const [visualQue, setVisualQue] = useState('waiting'); // 'waiting', 'correct' or 'incorrect'
+    const [text, setText] = useState(current.letter);
 
-
-    function generateCards(newLevel) {
-        const shuffled = alphabet.sort(() => 0.5 - Math.random());
-        // Get sub-array of first n elements after shuffled
-        let selected = shuffled.slice(0, newLevel);
-        return selected;
+    function randLetter() {
+        return alphabet[~~(Math.random() * alphabet.length)]
     }
 
-    function changeLevel(newLevel) {
-        setLevel(newLevel)
-        setItems(generateCards(newLevel))
+    async function checkInput(userInput) {
+        console.log(userInput);
+        console.log(current.word);
+
+        if (userInput.toLowerCase() === current.word.toLowerCase()) {
+            setVisualQue('correct');
+            setScore(score + 10);
+        } else {
+            setVisualQue('incorrect');
+        }
+        setText(current.word)
+        await new Promise(r => setTimeout(r, 700));
+        newRound();
     }
+
+    async function newRound() {
+        let randLetter = alphabet[~~(Math.random() * alphabet.length)]
+        setVisualQue('waiting')
+        setCurrent(randLetter)
+        setText(randLetter.letter)
+    }
+
 
     return (
-        <div id="study-page">
-            <h1>Study Page</h1>
-
-            <LevelSelector maxLevel={props.maxLevel} changeLevel={changeLevel} level={level} />
-            <main>
-                {items.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
-            </main>
+        <div id="practice-page">
+            <h1>Test Yourself</h1>
+            <h2>Your Score: {score}</h2>
+            <div className='card-container'>
+                <Card text={text} visualQue={visualQue} checkInput={checkInput} />
+            </div>
         </div>
     )
 }
 
-export default Study;
+export default Practice;

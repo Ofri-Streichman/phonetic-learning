@@ -18,14 +18,14 @@ export default function LetterCard(props) {
 
 
     return <div className={"Card " + props.visualQue}>
-        <h2>{props.letter}</h2>
+        <h2>{props.text}</h2>
 
         <div className="CardInput">
             <form method="post" onSubmit={handleSubmit} autocomplete="off">
                 <label>
                     <input name="userInput" id="userInput" />
                 </label>
-                {/* <button type="submit"><CheckBoxIcon /></button> */}
+                <button type="submit"><CheckBoxIcon /></button>
             </form>
         </div>
     </div>
