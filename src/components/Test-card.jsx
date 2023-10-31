@@ -8,7 +8,7 @@ export default function LetterCard(props) {
         // Prevent the browser from reloading the page
         e.preventDefault();
         // Read the form data
-        const userInputVal =  Object.fromEntries((new FormData(e.target)).entries()).userInput;
+        const userInputVal = Object.fromEntries((new FormData(e.target)).entries()).userInput;
         var userInput = document.querySelector('#userInput');
         // console
         userInput.value = '';
@@ -20,9 +20,9 @@ export default function LetterCard(props) {
         <h2>{props.letter}</h2>
 
         <div className="CardInput">
-                <label>
-                    <input name="userInput" id="userInput" />
-                </label>
+            <label>
+                <input name={props.letter} id={"userInput" + props.letter} className="userInput" />
+            </label>
         </div>
     </div>
 }

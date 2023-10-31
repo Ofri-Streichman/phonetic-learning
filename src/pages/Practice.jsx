@@ -38,8 +38,8 @@ function Practice() {
 
 
     return (
-        <div id="practice-page">
-            <h1>Test Yourself</h1>
+        <div id="practice-page" className="page">
+            <h1>Practice What You Learned</h1>
             <h2>Your Score: {score}</h2>
             <div className='card-container'>
                 <Card text={text} visualQue={visualQue} checkInput={checkInput} />

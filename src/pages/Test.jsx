@@ -45,23 +45,54 @@ function Test(props) {
         e.preventDefault();
         // Read the form data
         const userInputVal = Object.fromEntries((new FormData(e.target)).entries()).userInput;
-        var userInput = document.querySelector('#userInput');
-        // console
-        userInput.value = '';
-        props.checkInput(userInputVal);
+        var userInput = document.querySelectorAll('.userInput');
+        // checkInput(userInputVal);
+
+        console.log("check")
+        // console.log(userInput)
+        // console.log(userInputVal)
+
+        const form = document.getElementById('myForm');
+
+        // ✅ Get all form elements
+        const formElements = Array.from(form.elements);
+
+        formElements.forEach(element => {
+            console.log(element);
+            console.log(element.value);
+        });
+
+        console.log('--------------------------');
+
+        // ✅ Get only the input elements in a form
+        const onlyInputs = document.querySelectorAll('#myForm input');
+
+        onlyInputs.forEach(input => {
+            console.log(input);
+        });
+
     }
 
 
     return (
-        <div id="test-page">
+        <div id="test-page" className="page">
             <h1>Test Yourself</h1>
-            <div className="study-container">
-                <form method="post" onSubmit={handleSubmit} autocomplete="off">
-                    {shuffled.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
-                    <button type="submit" className='Submit-button'><CheckBoxIcon /></button>
+            <form id="myForm" onSubmit={handleSubmit} autoComplete="off">
 
-                </form>
-            </div>
+                <div className="test-container">
+                    {shuffled.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
+                    <button type="submit" className='Submit-button'>
+                        <div className='button-inside'>
+                            <CheckBoxIcon />
+                            <div>
+                                Check My Answers
+                            </div>
+                        </div>
+                    </button>
+
+                </div>
+            </form>
+
         </div>
     )
 }
