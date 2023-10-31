@@ -48,19 +48,7 @@ function Test(props) {
         var userInput = document.querySelectorAll('.userInput');
         // checkInput(userInputVal);
 
-        console.log("check")
-        // console.log(userInput)
-        // console.log(userInputVal)
-
-        const form = document.getElementById('myForm');
-
-        // ✅ Get all form elements
-        const formElements = Array.from(form.elements);
-
-        formElements.forEach(element => {
-            console.log(element);
-            console.log(element.value);
-        });
+        console.log("check");
 
         console.log('--------------------------');
 
@@ -68,7 +56,9 @@ function Test(props) {
         const onlyInputs = document.querySelectorAll('#myForm input');
 
         onlyInputs.forEach(input => {
-            console.log(input);
+            console.log(input.name);
+            console.log(input.value);
+
         });
 
     }
