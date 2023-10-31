@@ -522,3 +522,8 @@ a,
 .Submit-button{
   background-color:#3992ff ;
 }
+
+#main{
+  display: flex;
+  flex-direction: column;
+}

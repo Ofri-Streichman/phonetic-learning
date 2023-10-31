@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Card from "../components/Test-card";
 import shortid, { generate } from 'shortid';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-
+import phonetic_alphabet from "../phonetic_alphabet.json";
 
 function Test(props) {
-    let alphabet = props.alphabet;
-    const shuffled = alphabet.sort(() => 0.5 - Math.random());
+    let alphabet = phonetic_alphabet.dictionary;
+    const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
 
     const [current, setCurrent] = useState(randLetter());
     const [score, setScore] = useState(0);

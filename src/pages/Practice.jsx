@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Card from "../components/Practice-card"
+import phonetic_alphabet from "../phonetic_alphabet.json";
 
-function Practice(props) {
-    let alphabet = props.alphabet;
+
+function Practice() {
+    let alphabet = phonetic_alphabet.dictionary;
     const [current, setCurrent] = useState(randLetter());
     const [score, setScore] = useState(0);
     const [visualQue, setVisualQue] = useState('waiting'); // 'waiting', 'correct' or 'incorrect'

@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
+import Home from "./Home";
 import Study from './Study';
 import Practice from './Practice';
 import Test from './Test';
@@ -38,19 +43,5 @@ function App(props) {
   // );
 }
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Home />,
-//     errorElement: <About />,
-//     // loader: rootLoader,
-//     // children: [
-//     //   {
-//     //     path: "/Home",
-//     //     element: <Home />,
-//     //   }
-//     // ],
-//   },
-// ]);
 
 export default App;
