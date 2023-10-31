@@ -1,5 +1,4 @@
 import React from 'react';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 
 export default function LetterCard(props) {
