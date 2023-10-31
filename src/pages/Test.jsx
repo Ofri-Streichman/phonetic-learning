@@ -10,7 +10,7 @@ function Test(props) {
 
     const [current, setCurrent] = useState(randLetter());
     const [score, setScore] = useState(0);
-    const [visualQue, setVisualQue] = useState('waiting'); // 'waiting', 'correct' or 'incorrect'
+    const [visualQues, setVisualQues] = useState({}); // 'waiting', 'correct' or 'incorrect'
     const [text, setText] = useState(current.letter);
 
 
@@ -18,27 +18,29 @@ function Test(props) {
         return alphabet[~~(Math.random() * alphabet.length)]
     }
 
-    async function checkInput(userInput) {
-        console.log(userInput);
-        console.log(current.word);
+    async function checkanswer(userInput, letter) {
 
-        if (userInput.toLowerCase() === current.word.toLowerCase()) {
-            setVisualQue('correct');
-            setScore(score + 10);
+        var letterItem = alphabet.find((element) => element.letter === letter);
+        console.log(letterItem);
+
+        if (userInput.toLowerCase() === letterItem.word.toLowerCase()) {
+            console.log("true!");
+            setVisualQues({ ...visualQues, letter : 'correct' })
+            console.log(visualQues);
+
+            return true;
         } else {
-            setVisualQue('incorrect');
+            console.log("false!");
+            setVisualQues({ ...visualQues, letter: 'incorrect' })
+
+
+            return false;
         }
-        setText(current.word)
-        await new Promise(r => setTimeout(r, 1000));
-        newRound();
+
+
     }
 
-    async function newRound() {
-        let randLetter = alphabet[~~(Math.random() * alphabet.length)]
-        setVisualQue('waiting')
-        setCurrent(randLetter)
-        setText(randLetter.letter)
-    }
+
 
     function handleSubmit(e) {
         // Prevent the browser from reloading the page
@@ -58,8 +60,12 @@ function Test(props) {
         onlyInputs.forEach(input => {
             console.log(input.name);
             console.log(input.value);
-
+            checkanswer(input.value, input.name)
         });
+        console.log('--------------------------');
+
+
+        console.log(visualQues);
 
     }
 
@@ -70,7 +76,12 @@ function Test(props) {
             <form id="myForm" onSubmit={handleSubmit} autoComplete="off">
 
                 <div className="test-container">
-                    {shuffled.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
+                    {shuffled.map((x) => <Card
+                        key={shortid.generate()}
+                        letter={x.letter}
+                        word={x.word}
+                        visualQue={visualQues[x.letter]}
+                    />)}
                     <button type="submit" className='Submit-button'>
                         <div className='button-inside'>
                             <CheckBoxIcon />
