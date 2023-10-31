@@ -508,3 +508,13 @@ i {
   font-weight: 400;
   margin-bottom: 0;
 }
+
+.navbar-link{
+  font-size: large;
+}
+
+a,
+.undraggable {
+  text-decoration: none;
+  user-select: none;
+}

@@ -20,13 +20,13 @@ export default function Root() {
                 <nav>
                     <ul>
                         <li>
-                            <a onClick={() => loadPage(`study`)}>Study</a>
+                            <a className="navbar-link" onClick={() => loadPage(`study`)}>Study</a>
                         </li>
                         <li>
-                            <a onClick={() => loadPage(`practice`)}>Practice</a>
+                            <a className="navbar-link" onClick={() => loadPage(`practice`)}>Practice</a>
                         </li>
                         <li>
-                            <a onClick={() => loadPage(`test`)}>Test Yourself</a>
+                            <a className="navbar-link" onClick={() => loadPage(`test`)}>Test Yourself</a>
                         </li>
                     </ul>
                 </nav>
