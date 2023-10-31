@@ -23,7 +23,7 @@ function Test(props) {
 
         if (userInput.toLowerCase() === current.word.toLowerCase()) {
             setVisualQue('correct');
-            setScore(score+10);
+            setScore(score + 10);
         } else {
             setVisualQue('incorrect');
         }
@@ -32,11 +32,22 @@ function Test(props) {
         newRound();
     }
 
-    async function newRound(){
+    async function newRound() {
         let randLetter = alphabet[~~(Math.random() * alphabet.length)]
         setVisualQue('waiting')
         setCurrent(randLetter)
         setText(randLetter.letter)
+    }
+
+    function handleSubmit(e) {
+        // Prevent the browser from reloading the page
+        e.preventDefault();
+        // Read the form data
+        const userInputVal = Object.fromEntries((new FormData(e.target)).entries()).userInput;
+        var userInput = document.querySelector('#userInput');
+        // console
+        userInput.value = '';
+        props.checkInput(userInputVal);
     }
 
 
@@ -44,7 +55,11 @@ function Test(props) {
         <div id="test-page">
             <h1>Test Yourself</h1>
             <div className="study-container">
-                {shuffled.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
+                <form method="post" onSubmit={handleSubmit} autocomplete="off">
+                    {shuffled.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
+                    <button type="submit" className='Submit-button'><CheckBoxIcon /></button>
+
+                </form>
             </div>
         </div>
     )

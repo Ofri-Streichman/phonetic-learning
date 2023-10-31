@@ -21,12 +21,9 @@ export default function LetterCard(props) {
         <h2>{props.letter}</h2>
 
         <div className="CardInput">
-            <form method="post" onSubmit={handleSubmit} autocomplete="off">
                 <label>
                     <input name="userInput" id="userInput" />
                 </label>
-                {/* <button type="submit"><CheckBoxIcon /></button> */}
-            </form>
         </div>
     </div>
 }

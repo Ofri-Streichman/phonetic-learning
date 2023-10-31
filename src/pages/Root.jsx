@@ -16,17 +16,17 @@ export default function Root() {
     return (
         <>
             <div id="sidebar">
-                <h1><MenuBookIcon /> Phonetix</h1>
+                <h1 className='undraggable'><MenuBookIcon /> Phonetix</h1>
                 <nav>
                     <ul>
                         <li>
-                            <a className="navbar-link" onClick={() => loadPage(`study`)}>Study</a>
+                            <a className="navbar-link" onClick={() => loadPage(`study`)} href='/study'>Study</a>
                         </li>
                         <li>
-                            <a className="navbar-link" onClick={() => loadPage(`practice`)}>Practice</a>
+                            <a className="navbar-link" onClick={() => loadPage(`practice`)} href='/practice' >Practice</a>
                         </li>
                         <li>
-                            <a className="navbar-link" onClick={() => loadPage(`test`)}>Test Yourself</a>
+                            <a className="navbar-link" onClick={() => loadPage(`test`)} href='/test' >Test Yourself</a>
                         </li>
                     </ul>
                 </nav>
