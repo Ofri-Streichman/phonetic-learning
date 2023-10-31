@@ -25,13 +25,16 @@ function Test(props) {
 
         if (userInput.toLowerCase() === letterItem.word.toLowerCase()) {
             console.log("true!");
-            setVisualQues({ ...visualQues, letter : 'correct' })
-            console.log(visualQues);
+            setVisualQues({ "letter": 'correct' })
+            console.log(visualQues)
+            const correctItem = document.querySelector('.letter-'+letter);
+            correctItem.classList.add("correct")
+            
 
             return true;
         } else {
             console.log("false!");
-            setVisualQues({ ...visualQues, letter: 'incorrect' })
+            // setVisualQues({ ...visualQues, letter: 'incorrect' })
 
 
             return false;
@@ -73,7 +76,12 @@ function Test(props) {
     return (
         <div id="test-page" className="page">
             <h1>Test Yourself</h1>
-            <form id="myForm" onSubmit={handleSubmit} autoComplete="off">
+            <form
+                id="myForm"
+                onSubmit={handleSubmit}
+                autoComplete="off"
+                onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+            >
 
                 <div className="test-container">
                     {shuffled.map((x) => <Card
