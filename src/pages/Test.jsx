@@ -6,9 +6,9 @@ import phonetic_alphabet from "../phonetic_alphabet.json";
 
 let alphabet = phonetic_alphabet.dictionary;
 const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
-const convertArrayToObject = (array, key) => {
+const convertArrayToObject = (array, key, value) => {
     const initialValue = {};
-    return array.reduce((obj, item, value) => {
+    return array.reduce((obj, item) => {
         return {
             ...obj,
             [item[key]]: value,
@@ -24,13 +24,18 @@ export default function Test() {
     const [testPhase, setTestPhase] = useState("test"); // test or check
     let obj = convertArrayToObject(shuffled, "letter", "")
     const [formData, setFormData] = useState({
-        ...obj
+        ...shuffled.reduce((obj, item) => {
+            return {
+                ...obj,
+                ["letter"]: '',
+            };
+        }, {})
     });
     obj = convertArrayToObject(shuffled, "letter", "waiting")
     const [visualQues, setVisualQues] = useState({
         ...obj
     }); // 'waiting', 'correct' or 'incorrect'
-    
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -66,7 +71,7 @@ export default function Test() {
 
 
 
-    const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
         // Prevent the browser from reloading the page
         event.preventDefault();
 
@@ -99,7 +104,7 @@ export default function Test() {
                 autoComplete='off'
             >
                 <div className="test-container">
-                    {shuffled.map(({letter, word}) => <div className={"Card  letter-" + letter}>
+                    {shuffled.map(({ letter, word }) => <div className={"Card  letter-" + letter}>
                         <label htmlFor={letter}><h2>{letter}</h2></label>
                         <div className="CardInput">
                             <label>
