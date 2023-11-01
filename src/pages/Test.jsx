@@ -4,39 +4,33 @@ import shortid, { generate } from 'shortid';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import phonetic_alphabet from "../phonetic_alphabet.json";
 
-function Test(props) {
+function Test() {
     let alphabet = phonetic_alphabet.dictionary;
     const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
+    console.log("RESHUFFLED!")
 
-    const [current, setCurrent] = useState(randLetter());
     const [score, setScore] = useState(0);
+    const [testPhase, settestPhase] = useState("test"); // test or check
     const [visualQues, setVisualQues] = useState({}); // 'waiting', 'correct' or 'incorrect'
-    const [text, setText] = useState(current.letter);
 
 
-    function randLetter() {
-        return alphabet[~~(Math.random() * alphabet.length)]
-    }
-
-    async function checkanswer(userInput, letter) {
-
+    function checkanswer(userInput, letter) {
         var letterItem = alphabet.find((element) => element.letter === letter);
         console.log(letterItem);
 
+        const letterCard = document.querySelector('.letter-' + letter);
+        console.log(letterCard);
+
+
         if (userInput.toLowerCase() === letterItem.word.toLowerCase()) {
             console.log("true!");
-            setVisualQues({ "letter": 'correct' })
-            console.log(visualQues)
-            const correctItem = document.querySelector('.letter-'+letter);
-            correctItem.classList.add("correct")
+            letterCard.classList.add("correct")
             
 
             return true;
         } else {
             console.log("false!");
-            // setVisualQues({ ...visualQues, letter: 'incorrect' })
-
-
+            letterCard.classList.add("incorrect")
             return false;
         }
 
@@ -45,17 +39,12 @@ function Test(props) {
 
 
 
-    function handleSubmit(e) {
+    const handleSubmit = event => {
         // Prevent the browser from reloading the page
-        e.preventDefault();
-        // Read the form data
-        const userInputVal = Object.fromEntries((new FormData(e.target)).entries()).userInput;
-        var userInput = document.querySelectorAll('.userInput');
-        // checkInput(userInputVal);
+        event.preventDefault();
 
-        console.log("check");
-
-        console.log('--------------------------');
+        // cannot change the input anymore
+        settestPhase("check");
 
         // ✅ Get only the input elements in a form
         const onlyInputs = document.querySelectorAll('#myForm input');
@@ -66,9 +55,6 @@ function Test(props) {
             checkanswer(input.value, input.name)
         });
         console.log('--------------------------');
-
-
-        console.log(visualQues);
 
     }
 
@@ -81,6 +67,7 @@ function Test(props) {
                 onSubmit={handleSubmit}
                 autoComplete="off"
                 onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                testPhase={testPhase}
             >
 
                 <div className="test-container">
@@ -88,7 +75,6 @@ function Test(props) {
                         key={shortid.generate()}
                         letter={x.letter}
                         word={x.word}
-                        visualQue={visualQues[x.letter]}
                     />)}
                     <button type="submit" className='Submit-button'>
                         <div className='button-inside'>
