@@ -6,6 +6,15 @@ import phonetic_alphabet from "../phonetic_alphabet.json";
 
 let alphabet = phonetic_alphabet.dictionary;
 const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
+const convertArrayToObject = (array, key) => {
+    const initialValue = {};
+    return array.reduce((obj, item, value) => {
+        return {
+            ...obj,
+            [item[key]]: value,
+        };
+    }, initialValue);
+};
 console.log("RESHUFFLED!")
 
 
@@ -13,24 +22,14 @@ export default function Test() {
     // const [score, setScore] = useState(0);
     let score = 0;
     const [testPhase, setTestPhase] = useState("test"); // test or check
-    const [visualQues, setVisualQues] = useState({}); // 'waiting', 'correct' or 'incorrect'
-
-
-    const convertArrayToObject = (array, key) => {
-        const initialValue = {};
-        return array.reduce((obj, item) => {
-            return {
-                ...obj,
-                [item[key]]: '',
-            };
-        }, initialValue);
-    };
-
-        let obj = convertArrayToObject(shuffled, "letter")
-    
+    let obj = convertArrayToObject(shuffled, "letter", "")
     const [formData, setFormData] = useState({
         ...obj
     });
+    obj = convertArrayToObject(shuffled, "letter", "waiting")
+    const [visualQues, setVisualQues] = useState({
+        ...obj
+    }); // 'waiting', 'correct' or 'incorrect'
     
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -40,13 +39,8 @@ export default function Test() {
         });
     };
 
-    function checkanswer(userInput, letter) {
+    function checkanswer(letter, userInput) {
         var letterItem = alphabet.find((element) => element.letter === letter);
-        console.log(letterItem);
-
-        // const letterCard = document.querySelector('.letter-' + letter);
-        // console.log(letterCard);
-
 
         if (userInput.toLowerCase() === letterItem.word.toLowerCase()) {
             // letterCard.classList.add("correct")
@@ -56,6 +50,7 @@ export default function Test() {
                     [letter]: 'correct',
                 }
             )
+
             score += 8.5;
             console.log("score: ", score)
         } else {
@@ -71,7 +66,7 @@ export default function Test() {
 
 
 
-    const handleSubmit = event => {
+    const handleSubmit = async(event) => {
         // Prevent the browser from reloading the page
         event.preventDefault();
 
@@ -79,14 +74,17 @@ export default function Test() {
         setTestPhase("check");
 
         // ✅ Get only the input elements in a form
-        const onlyInputs = document.querySelectorAll('#myForm input');
 
-        onlyInputs.forEach(input => {
-            console.log(input.name);
-            console.log(input.value);
-            checkanswer(input.value, input.name)
-        });
+        for (var field in formData) {
+            if (Object.prototype.hasOwnProperty.call(formData, field)) {
+                await checkanswer(field, formData[field])
+            }
+        }
         console.log('--------------------------');
+        console.log("visualQues")
+
+        console.log(visualQues)
+
 
     }
 
