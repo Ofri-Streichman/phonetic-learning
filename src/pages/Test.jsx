@@ -24,7 +24,7 @@ export default function Test() {
     const [testPhase, setTestPhase] = useState("test"); // test or check
     let obj = convertArrayToObject(shuffled, "letter", "")
     const [formData, setFormData] = useState({
-        ...shuffled.reduce((obj, item) => {
+        ...shuffled.reduce((obj) => {
             return {
                 ...obj,
                 ["letter"]: '',
@@ -47,7 +47,7 @@ export default function Test() {
     function checkanswer(letter, userInput) {
         var letterItem = alphabet.find((element) => element.letter === letter);
 
-        if (userInput.toLowerCase() === letterItem.word.toLowerCase()) {
+        if (userInput && userInput.toLowerCase() === letterItem.word.toLowerCase()) {
             // letterCard.classList.add("correct")
             setVisualQues(
                 {
@@ -104,21 +104,22 @@ export default function Test() {
                 autoComplete='off'
             >
                 <div className="test-container">
-                    {shuffled.map(({ letter, word }) => <div className={"Card  letter-" + letter}>
-                        <label htmlFor={letter}><h2>{letter}</h2></label>
-                        <div className="CardInput">
-                            <label>
-                                <input
-                                    type="text"
-                                    id={"userInput" + letter}
-                                    name={letter}
-                                    value={formData[letter]}
-                                    onChange={handleInputChange}
-                                    className={"userInput " + visualQues[letter]}
-                                />
-                            </label>
+                    {shuffled.map(({ letter, word }) =>
+                        <div className={"Card " + visualQues[letter]}>
+                            <label htmlFor={letter}><h2>{letter}</h2></label>
+                            <div className="CardInput">
+                                <label>
+                                    <input
+                                        type="text"
+                                        id={"userInput" + letter}
+                                        name={letter}
+                                        value={formData[letter]}
+                                        onChange={handleInputChange}
+                                        className={"userInput "}
+                                    />
+                                </label>
+                            </div>
                         </div>
-                    </div>
                     )}
                     <button type="submit" className='Submit-button'>
                         <div className='button-inside'>
