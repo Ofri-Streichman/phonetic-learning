@@ -4,37 +4,69 @@ import shortid, { generate } from 'shortid';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import phonetic_alphabet from "../phonetic_alphabet.json";
 
-function Test() {
-    let alphabet = phonetic_alphabet.dictionary;
-    const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
-    console.log("RESHUFFLED!")
+let alphabet = phonetic_alphabet.dictionary;
+const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
+console.log("RESHUFFLED!")
 
-    const [score, setScore] = useState(0);
-    const [testPhase, settestPhase] = useState("test"); // test or check
+
+export default function Test() {
+    // const [score, setScore] = useState(0);
+    let score = 0;
+    const [testPhase, setTestPhase] = useState("test"); // test or check
     const [visualQues, setVisualQues] = useState({}); // 'waiting', 'correct' or 'incorrect'
 
+
+    const convertArrayToObject = (array, key) => {
+        const initialValue = {};
+        return array.reduce((obj, item) => {
+            return {
+                ...obj,
+                [item[key]]: '',
+            };
+        }, initialValue);
+    };
+
+        let obj = convertArrayToObject(shuffled, "letter")
+    
+    const [formData, setFormData] = useState({
+        ...obj
+    });
+    
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
 
     function checkanswer(userInput, letter) {
         var letterItem = alphabet.find((element) => element.letter === letter);
         console.log(letterItem);
 
-        const letterCard = document.querySelector('.letter-' + letter);
-        console.log(letterCard);
+        // const letterCard = document.querySelector('.letter-' + letter);
+        // console.log(letterCard);
 
 
         if (userInput.toLowerCase() === letterItem.word.toLowerCase()) {
-            console.log("true!");
-            letterCard.classList.add("correct")
-            
-
-            return true;
+            // letterCard.classList.add("correct")
+            setVisualQues(
+                {
+                    ...visualQues,
+                    [letter]: 'correct',
+                }
+            )
+            score += 8.5;
+            console.log("score: ", score)
         } else {
-            console.log("false!");
-            letterCard.classList.add("incorrect")
-            return false;
+            // letterCard.classList.add("incorrect")
+            setVisualQues(
+                {
+                    ...visualQues,
+                    [letter]: 'incorrect',
+                }
+            )
         }
-
-
     }
 
 
@@ -44,7 +76,7 @@ function Test() {
         event.preventDefault();
 
         // cannot change the input anymore
-        settestPhase("check");
+        setTestPhase("check");
 
         // ✅ Get only the input elements in a form
         const onlyInputs = document.querySelectorAll('#myForm input');
@@ -62,20 +94,29 @@ function Test() {
     return (
         <div id="test-page" className="page">
             <h1>Test Yourself</h1>
+            <h2>Your Score is {score} </h2>
             <form
-                id="myForm"
                 onSubmit={handleSubmit}
-                autoComplete="off"
                 onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                testPhase={testPhase}
+                autoComplete='off'
             >
-
                 <div className="test-container">
-                    {shuffled.map((x) => <Card
-                        key={shortid.generate()}
-                        letter={x.letter}
-                        word={x.word}
-                    />)}
+                    {shuffled.map(({letter, word}) => <div className={"Card  letter-" + letter}>
+                        <label htmlFor={letter}><h2>{letter}</h2></label>
+                        <div className="CardInput">
+                            <label>
+                                <input
+                                    type="text"
+                                    id={"userInput" + letter}
+                                    name={letter}
+                                    value={formData[letter]}
+                                    onChange={handleInputChange}
+                                    className={"userInput " + visualQues[letter]}
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    )}
                     <button type="submit" className='Submit-button'>
                         <div className='button-inside'>
                             <CheckBoxIcon />
@@ -84,12 +125,8 @@ function Test() {
                             </div>
                         </div>
                     </button>
-
                 </div>
             </form>
-
         </div>
     )
 }
-
-export default Test;
