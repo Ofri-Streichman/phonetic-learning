@@ -158,19 +158,14 @@ import phonetic_alphabet from "../phonetic_alphabet.json";
 
 let alphabet = phonetic_alphabet.dictionary;
 const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
-const convertArrayToObject = (array, key, value) => {
-    const initialValue = {};
-    return array.reduce((obj, item) => {
-        return {
-            ...obj,
-            [item[key]]: value,
-        };
-    }, initialValue);
-};
 console.log("RESHUFFLED!")
 
 
 export default function Test() {
+    const [testPart, setTestPart] = useState("opening");
+    const [score, setScore] = useState(0);
+
+
     const { register, handleSubmit, getValues } = useForm({
         ...shuffled.reduce((obj, item) => {
             return {
@@ -188,12 +183,16 @@ export default function Test() {
             };
         }, {})
     }); // 'waiting', 'correct' or 'incorrect'
-    console.log(visualQues)
+    const [timer, setTimer] = useState(60)
 
+    const startTest = () => {
+        setTestPart("test");
+        setScore(0);
+    }
     const onSubmit = async (formData) => {
         setIsSubmitted(true)
         let Q = { ...formData }
-        for (let field of Object.keys(formData)){
+        for (let field of Object.keys(formData)) {
             let fieldCorrect = await checkanswer(field, formData[field]) ? "correct" : "incorrect";
             Q[field] = fieldCorrect;
         }
@@ -232,42 +231,61 @@ export default function Test() {
     return (
         <div id="test-page" className="page">
             <h1>Test Yourself</h1>
-            {/* <h2>Your Score is {score} </h2> */}
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                autoComplete='off'
-            >
-                <div className="test-container">
-                    {shuffled.map(({ letter, word }) =>
-                        <div className={"Card " + visualQues[letter]}>
-                            {/* // <div className={"Card "}> */}
-                            <label htmlFor={letter}><h2>{letter}</h2></label>
-                            <div className="CardInput">
-                                {/* <label>{letter}</label> */}
-                                <input disabled={isSubmitted} {...register(letter)} />
-                            </div>
-                        </div>
-                    )}
-                    <input type="submit" />
+            {(testPart == "opening") &&
+                <div>
+                    <h2>You will have {timer} seconds to match 12 letters with their phonetic alphabet representation.<br />Click START to begin the test.</h2>
                     <button
-                        type="button"
-                        onClick={() => {
-                            alert(JSON.stringify(getValues()));
-                        }}
-                    >
-                        Alert All Values
-                    </button>
-                    <button type="submit" className='Submit-button'>
-                        <div className='button-inside'>
-                            <CheckBoxIcon />
-                            <div>
-                                Check My Answers
-                            </div>
-                        </div>
+                        className='Submit-button'
+                        onClick={startTest}>
+                        START
                     </button>
                 </div>
-            </form>
+            }
+            {(testPart == "test") &&
+                <>
+                    {isSubmitted ?
+                        (<h2>Your score is: {score}</h2>) :
+                        (<h2>You have {timer} seconds left</h2>)
+                    }
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                        autoComplete='off'
+                    >
+                        <div className="test-container">
+                            {shuffled.map(({ letter, word }) =>
+                                <div className={"Card " + visualQues[letter]}>
+                                    {/* // <div className={"Card "}> */}
+                                    <label htmlFor={letter}><h2>{letter}</h2></label>
+                                    <div className="CardInput">
+                                        {/* <label>{letter}</label> */}
+                                        <input disabled={isSubmitted} {...register(letter)} />
+                                    </div>
+                                </div>
+                            )}
+                            <input type="submit" />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    alert(JSON.stringify(getValues()));
+                                }}
+                            >
+                                Alert All Values
+                            </button>
+                            <button type="submit" className='Submit-button'>
+                                <div className='button-inside'>
+                                    <CheckBoxIcon />
+                                    <div>
+                                        Check My Answers
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </>
+            }
+            {/* <h2>Your Score is {score} </h2> */}
+
         </div>
     )
     return (
