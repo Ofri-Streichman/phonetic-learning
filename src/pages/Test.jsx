@@ -1,5 +1,5 @@
 
-import { useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import React, { useState, useEffect, useCallback } from 'react';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import phonetic_alphabet from "../phonetic_alphabet.json";
@@ -12,7 +12,7 @@ export default function Test() {
 
     const shuffle = () => {
         console.log("RESHUFFLED!");
-        return alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
+        return alphabet.sort(() => 0.5 - Math.random()).slice(0, 11);
     }
 
     const [shuffled, setShuffled] = useState(shuffle());
@@ -82,17 +82,13 @@ export default function Test() {
         setScore(0);
     }
 
-    const startTest = () => {
-        setTestPart("test");
-    }
-
     const onSubmit = async (formData) => {
         setIsSubmitted(true);
         let Q = { ...formData };
         let accScore = 0;
         for (let field of Object.keys(formData)) {
             let fieldCorrect = await checkanswer(field, formData[field]) ? "correct" : "incorrect";
-            if (fieldCorrect == "correct") { accScore += 8.5 };
+            if (fieldCorrect === "correct") { accScore += 10 };
             Q[field] = fieldCorrect;
         }
         setVisualQues(Q);
@@ -109,21 +105,23 @@ export default function Test() {
     return (
         <div id="test-page" className="page">
             <h1>Test Yourself</h1>
-            {(testPart == "opening") &&
-                <div>
-                    <h2>You will have {TEST_LENGTH_IN_SECONDS} seconds to match 12 letters with their phonetic alphabet representation.<br />Click START to begin the test.</h2>
-                    <button
-                        className='Submit-button'
-                        onClick={() => setTestPart("test")}
-                    >
-                        START
-                    </button>
-                </div>
+            {(testPart === "opening") &&
+                <>
+                    <h2>You will have {TEST_LENGTH_IN_SECONDS} seconds to match 11 letters with their phonetic alphabet representation.<br />Click START to begin the test.</h2>
+                    <div className="start-button-wrapper">
+                        <button
+                            className='Submit-button'
+                            onClick={() => setTestPart("test")}
+                        >
+                            START
+                        </button>
+                    </div>
+                </>
             }
-            {(testPart == "test") &&
+            {(testPart === "test") &&
                 <>
                     {isSubmitted ?
-                        (<h2>Time's up.<br />Your score is: {score}</h2>) :
+                        (<h2>Time's up. Your score is: {score}</h2>) :
                         (<h2>You have <Timer seconds={TEST_LENGTH_IN_SECONDS} timeOutHandler={handleSubmit(onSubmit)} /> seconds left</h2>)
                     }
                     <form
@@ -136,10 +134,11 @@ export default function Test() {
                                 <div
                                     className={"Card " + visualQues[letter]}
                                     key={shortid.generate()}>
-                                    {/* // <div className={"Card "}> */}
-                                    <label htmlFor={letter}><h2>{letter}</h2></label>
+                                    {isSubmitted ?
+                                        (<label htmlFor={letter}><h2>{word}</h2></label>) :
+                                        (<label htmlFor={letter}><h2>{letter}</h2></label>)
+                                    }
                                     <div className="CardInput">
-                                        {/* <label>{letter}</label> */}
                                         <input disabled={isSubmitted} {...register(letter)} />
                                     </div>
                                 </div>

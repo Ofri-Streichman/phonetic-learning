@@ -402,7 +402,6 @@ i {
 .Card {
   display: flex;
   flex-direction: column;
-  /* margin: 1rem; */
   padding: 1rem;
   justify-content: center;
   align-items: center;
@@ -415,7 +414,6 @@ i {
 }
 
 #practice-page {
-  background-color: #fff9e9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -425,6 +423,7 @@ i {
   display: flex;
   height: 100%;
   justify-content: center;
+  margin-top: 2rem;
 }
 
 .card-container > .Card {
@@ -497,7 +496,7 @@ i {
 
 .test-container {
   margin: 2rem;
-  gap:2rem;
+  gap:1rem 2rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
 }
@@ -532,7 +531,7 @@ a,
 
 .page>h1,
 .page>h2 {
-  margin-left: 2rem;
+  margin: 1rem 2rem 0rem;
   /* font-size: 2.5rem; */
   margin-bottom: 0;
 }
@@ -545,4 +544,16 @@ a,
 
 .correct {
   background-color: #6eed44b7;
+}
+
+.start-button-wrapper{
+  width: 100%;
+  /* display: flex; */
+  /* justify-content: center; */
+  margin: 2rem;
+}
+.start-button-wrapper>button{
+  height: 4rem;
+  width: 8rem;
+  margin: 0;
 }
