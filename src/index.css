@@ -114,6 +114,7 @@ form[action$="destroy"] button {
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
   display: flex;
+  height: 100%;
   flex-direction: column;
 }
 
@@ -401,7 +402,7 @@ i {
 .Card {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  /* margin: 1rem; */
   padding: 1rem;
   justify-content: center;
   align-items: center;
@@ -496,7 +497,7 @@ i {
 
 .test-container {
   margin: 2rem;
-  /* width: 100%; */
+  gap:2rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
 }
@@ -529,9 +530,10 @@ a,
   width: 100%;
 }
 
-.page h1 {
+.page>h1,
+.page>h2 {
   margin-left: 2rem;
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
   margin-bottom: 0;
 }
 .page > p {
