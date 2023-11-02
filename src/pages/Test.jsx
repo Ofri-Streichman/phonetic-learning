@@ -189,21 +189,15 @@ export default function Test() {
     }); // 'waiting', 'correct' or 'incorrect'
     console.log(visualQues)
 
-    const onSubmit = async(formData) => {
-// OFRI WAS HERE
-        let Q = 
-        Object.keys(formData).forEach(function (letter, index) {
-            Q[letter] = checkanswer(formData[letter]);
-        });
+    const onSubmit = async (formData) => {
+        // OFRI WAS HERE
+        let Q = { ...formData }
+        for (let field of Object.keys(formData)){
+            let fieldCorrect = await checkanswer(field, formData[field]) ? "correct" : "incorrect";
+            Q[field] = fieldCorrect;
+        }
+        setVisualQues(Q);
 
-        setVisualQues(Q)
-        
-        // for (var field in formData) {
-        //     if (Object.prototype.hasOwnProperty.call(formData, field)) {
-        //         console.log("checking ", field, formData[field])
-        //         await checkanswer(field, formData[field])
-        //     }
-        // }
         console.log(JSON.stringify(formData));
         console.log(JSON.stringify(visualQues));
     };
@@ -212,25 +206,25 @@ export default function Test() {
         var letterItem = alphabet.find((element) => element.letter === letter);
         let res = await (userInput && userInput.toLowerCase() === letterItem.word.toLowerCase());
         return res;
-        if (userInput && userInput.toLowerCase() === letterItem.word.toLowerCase()) {
-            console.log("letter correct ", letter)
-            await setVisualQues(
-                {
-                    ...visualQues,
-                    [letter]: 'correct',
-                }
-            )
-        } else {
-            console.log("letter incorrect ", letter)
-            await setVisualQues(
-                {
-                    ...visualQues,
-                    [letter]: 'incorrect',
-                }
-            )
-        }
-        console.log("visualQues: ",JSON.stringify(visualQues));
-        return;
+        // if (userInput && userInput.toLowerCase() === letterItem.word.toLowerCase()) {
+        //     console.log("letter correct ", letter)
+        //     await setVisualQues(
+        //         {
+        //             ...visualQues,
+        //             [letter]: 'correct',
+        //         }
+        //     )
+        // } else {
+        //     console.log("letter incorrect ", letter)
+        //     await setVisualQues(
+        //         {
+        //             ...visualQues,
+        //             [letter]: 'incorrect',
+        //         }
+        //     )
+        // }
+        // console.log("visualQues: ", JSON.stringify(visualQues));
+        // return;
     }
 
 
@@ -246,7 +240,7 @@ export default function Test() {
                 <div className="test-container">
                     {shuffled.map(({ letter, word }) =>
                         <div className={"Card " + visualQues[letter]}>
-                        {/* // <div className={"Card "}> */}
+                            {/* // <div className={"Card "}> */}
                             <label htmlFor={letter}><h2>{letter}</h2></label>
                             <div className="CardInput">
                                 {/* <label>{letter}</label> */}
