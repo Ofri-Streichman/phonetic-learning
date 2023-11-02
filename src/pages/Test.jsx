@@ -55,7 +55,7 @@ export default function Test() {
             };
         }, {})
     }); // 'waiting', 'correct' or 'incorrect'
-    const TEST_LENGTH_IN_SECONDS = 10;
+    const TEST_LENGTH_IN_SECONDS = 60;
     const tryAgain = () => {
         setShuffled(shuffle());
 
@@ -110,7 +110,7 @@ export default function Test() {
                     <h2>You will have {TEST_LENGTH_IN_SECONDS} seconds to match 11 letters with their phonetic alphabet representation.<br />Click START to begin the test.</h2>
                     <div className="start-button-wrapper">
                         <button
-                            className='Submit-button'
+                            className='Submit-button start-button-test'
                             onClick={() => setTestPart("test")}
                         >
                             START

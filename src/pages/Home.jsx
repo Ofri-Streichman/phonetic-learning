@@ -44,10 +44,10 @@ const HomePage = () => {
             </div>
             <div className="hero-section">
                 <div className="hero-content">
-                    <h1>Welcome to Phonetic Alphabet Mastery</h1>
-                    <p>Unlock the power of clear communication with letter-word pairs!</p>
-                    <p>Discover the art of precise communication through the phonetic alphabet - an essential tool used across various industries.</p>
-                    <button className="start-button-home"><a href="/study">Let's Start</a></button>
+                    <h1>Welcome to Phonetix!</h1>
+                    <p>Discover the magic behind NATO's phonetic alphabet, transforming mundane letters into a symphony of words.</p>
+                    <p>These aren't just letters; they're linguistic superheroes that add zest and clarity to communication.</p>
+                    <button className="start-button-home"><a href="/study">Start Learning</a></button>
                     
                 </div>
             </div>
