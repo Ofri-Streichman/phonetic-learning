@@ -153,17 +153,22 @@ import { useForm, useFormState } from "react-hook-form";
 import React, { useState, useEffect, useCallback } from 'react';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import phonetic_alphabet from "../phonetic_alphabet.json";
+import shortid from "shortid";
+import Timer from "../components/Timer"
 
 let alphabet = phonetic_alphabet.dictionary;
-function shuffle() {
-    console.log("RESHUFFLED!");
-    return alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
-}
-
 
 export default function Test() {
 
-    const [shuffled, setShuffled] = useState(shuffle());
+    const shuffle = () => {
+        console.log("RESHUFFLED!");
+        return alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
+    }
+
+    const [shuffled, setShuffled] = useState(() => {
+        console.log("const [shuffled, setShuffled]")
+        return shuffle()
+    });
     const [testPart, setTestPart] = useState("opening");
     const [score, setScore] = useState(0);
 
@@ -203,9 +208,12 @@ export default function Test() {
             };
         }, {})
     }); // 'waiting', 'correct' or 'incorrect'
-    const [timer, setTimer] = useState(60)
+    const [timer, setTimer] = useState(60);
+
+    let interval;
 
     const tryAgain = () => {
+        console.log("try again");
         setShuffled(shuffle());
 
         reset(formValues => ({
@@ -233,12 +241,28 @@ export default function Test() {
     }
 
     const startTest = () => {
+        console.log("startTest");
+
         setTestPart("test");
-        
+        // useEffect(() => {
+        //     if (timer <= 0) return;
+
+        //     // save intervalId to clear the interval when the
+        //     // component re-renders
+        //     const intervalId = setInterval(() => {
+        //         setTimer(timer - 1);
+        //     }, 1000);
+
+        //     // clear interval on re-render to avoid memory leaks
+        //     return () => clearInterval(intervalId);
+        //     // add timeLeft as a dependency to re-rerun the effect
+        //     // when we update it
+        // }, [timer]);
     }
 
     const onSubmit = async (formData) => {
-        setIsSubmitted(true)
+        setIsSubmitted(true);
+        clearInterval(interval);
         let Q = { ...formData };
         let accScore = 0;
         for (let field of Object.keys(formData)) {
@@ -279,7 +303,7 @@ export default function Test() {
                 <>
                     {isSubmitted ?
                         (<h2>Your score is: {score}</h2>) :
-                        (<h2>You have {timer} seconds left</h2>)
+                        (<h2>You have <Timer seconds={60} /> seconds left</h2>)
                     }
                     <form
                         onSubmit={handleSubmit(onSubmit)}
@@ -288,7 +312,9 @@ export default function Test() {
                     >
                         <div className="test-container">
                             {shuffled.map(({ letter, word }) =>
-                                <div className={"Card " + visualQues[letter]}>
+                                <div
+                                    className={"Card " + visualQues[letter]}
+                                    key={shortid.generate()}>
                                     {/* // <div className={"Card "}> */}
                                     <label htmlFor={letter}><h2>{letter}</h2></label>
                                     <div className="CardInput">
