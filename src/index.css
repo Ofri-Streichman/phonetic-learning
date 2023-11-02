@@ -509,6 +509,7 @@ a,
 .undraggable {
   text-decoration: none;
   user-select: none;
+  color: black
 }
 
 .Submit-button {
@@ -557,3 +558,58 @@ a,
   width: 8rem;
   margin: 0;
 }
+
+/* *********HERO************** */
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #3494e6, #ec6ead);
+  color: #fff;
+  text-align: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 600px;
+  position: relative;
+}
+
+
+/* p {
+  font-size: 1.2em;
+  line-height: 1.6;
+} */
+
+.start-button-home {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background: #ffce00;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.floating-letters {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-letters span {
+  display: inline-block;
+  font-size: 2em;
+  position: absolute;
+}
+
+
+
+

@@ -10,9 +10,12 @@ export default function Root() {
     return (
         <>
             <div id="sidebar">
-                <h1 className='undraggable'><MenuBookIcon /> Phonetix</h1>
+                <h2 className='undraggable'><a href='/'><MenuBookIcon /> Phonetix</a></h2>
                 <nav>
                     <ul>
+                        <li>
+                            <a className="navbar-link" href='/'>Home</a>
+                        </li>
                         <li>
                             <a className="navbar-link" href='/study'>Study</a>
                         </li>
