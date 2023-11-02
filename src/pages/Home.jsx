@@ -35,15 +35,6 @@ const HomePage = () => {
 
     return (
         <div className="home-page page">
-            <div className="hero-section">
-                <div className="hero-content">
-                    <h1>Welcome to Phonetic Alphabet Mastery</h1>
-                    <p>Unlock the power of clear communication with letter-word pairs!</p>
-                    <p>Discover the art of precise communication through the phonetic alphabet - an essential tool used across various industries.</p>
-                    <button className="start-button">Let's Start</button>
-                    
-                </div>
-            </div>
             <div className="floating-letters">
                 {letters.split('').map((letter, index) => (
                     <span key={index} style={{ '--x': getRandomValue(), '--y': getRandomValue(), '--init-x': getRandomCoordinates(), '--init-y': getRandomCoordinates(), '--turnDegree': getRandomDegree() }}>
@@ -51,6 +42,16 @@ const HomePage = () => {
                     </span>
                 ))}
             </div>
+            <div className="hero-section">
+                <div className="hero-content">
+                    <h1>Welcome to Phonetic Alphabet Mastery</h1>
+                    <p>Unlock the power of clear communication with letter-word pairs!</p>
+                    <p>Discover the art of precise communication through the phonetic alphabet - an essential tool used across various industries.</p>
+                    <button className="start-button-home"><a href="/study">Let's Start</a></button>
+                    
+                </div>
+            </div>
+            
         </div>
     );
 };
