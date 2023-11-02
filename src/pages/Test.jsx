@@ -150,23 +150,26 @@
 // }
 
 import { useForm, useFormState } from "react-hook-form";
-import React, { useState } from 'react';
-import Card from "../components/Test-card";
-import shortid, { generate } from 'shortid';
+import React, { useState, useEffect, useCallback } from 'react';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import phonetic_alphabet from "../phonetic_alphabet.json";
 
 let alphabet = phonetic_alphabet.dictionary;
-const shuffled = alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
-console.log("RESHUFFLED!")
+function shuffle() {
+    console.log("RESHUFFLED!");
+    return alphabet.sort(() => 0.5 - Math.random()).slice(0, 12);
+}
 
 
 export default function Test() {
+
+    const [shuffled, setShuffled] = useState(shuffle());
     const [testPart, setTestPart] = useState("opening");
     const [score, setScore] = useState(0);
 
 
-    const { register, handleSubmit, getValues } = useForm({
+    // useForm
+    const { register, handleSubmit, reset } = useForm({
         ...shuffled.reduce((obj, item) => {
             return {
                 ...obj,
@@ -174,6 +177,23 @@ export default function Test() {
             };
         }, {})
     });
+
+    const resetAsyncForm = useCallback(async () => {
+        const result = {
+            ...shuffled.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.letter]: '',
+                };
+            }, {})
+        }
+        reset(result); // asynchronously reset your form values
+    }, [reset]);
+
+    useEffect(() => {
+        resetAsyncForm()
+    }, [resetAsyncForm])
+
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [visualQues, setVisualQues] = useState({
         ...shuffled.reduce((obj, item) => {
@@ -185,18 +205,51 @@ export default function Test() {
     }); // 'waiting', 'correct' or 'incorrect'
     const [timer, setTimer] = useState(60)
 
+    const tryAgain = () => {
+        setShuffled(shuffle());
+
+        reset(formValues => ({
+            ...shuffled.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.letter]: '',
+                };
+            }, {})
+        }))
+
+        setVisualQues({
+            ...shuffled.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.letter]: "waiting",
+                };
+            }, {})
+        });
+
+        setTestPart("opening");
+        setIsSubmitted(false);
+        setScore(0);
+        setTimer(60);
+    }
+
     const startTest = () => {
         setTestPart("test");
-        setScore(0);
+        
     }
+
     const onSubmit = async (formData) => {
         setIsSubmitted(true)
-        let Q = { ...formData }
+        let Q = { ...formData };
+        let accScore = 0;
         for (let field of Object.keys(formData)) {
             let fieldCorrect = await checkanswer(field, formData[field]) ? "correct" : "incorrect";
+
+            console.log("fieldCorrect ", fieldCorrect, formData[field], field)
+            if (fieldCorrect == "correct") { accScore += 8.5 };
             Q[field] = fieldCorrect;
         }
         setVisualQues(Q);
+        setScore(accScore);
 
         console.log(JSON.stringify(formData));
         console.log(JSON.stringify(visualQues));
@@ -206,25 +259,6 @@ export default function Test() {
         var letterItem = alphabet.find((element) => element.letter === letter);
         let res = await (userInput && userInput.toLowerCase() === letterItem.word.toLowerCase());
         return res;
-        // if (userInput && userInput.toLowerCase() === letterItem.word.toLowerCase()) {
-        //     console.log("letter correct ", letter)
-        //     await setVisualQues(
-        //         {
-        //             ...visualQues,
-        //             [letter]: 'correct',
-        //         }
-        //     )
-        // } else {
-        //     console.log("letter incorrect ", letter)
-        //     await setVisualQues(
-        //         {
-        //             ...visualQues,
-        //             [letter]: 'incorrect',
-        //         }
-        //     )
-        // }
-        // console.log("visualQues: ", JSON.stringify(visualQues));
-        // return;
     }
 
 
@@ -263,64 +297,24 @@ export default function Test() {
                                     </div>
                                 </div>
                             )}
-                            <input type="submit" />
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    alert(JSON.stringify(getValues()));
-                                }}
-                            >
-                                Alert All Values
-                            </button>
-                            <button type="submit" className='Submit-button'>
-                                <div className='button-inside'>
-                                    <CheckBoxIcon />
-                                    <div>
-                                        Check My Answers
+                            {isSubmitted ?
+                                (<button className='Submit-button' onClick={tryAgain}>
+                                    TRY AGAIN
+                                </button>) :
+                                (<button type="submit" className='Submit-button'>
+                                    <div className='button-inside'>
+                                        <CheckBoxIcon />
+                                        <div>
+                                            Check My Answers
+                                        </div>
                                     </div>
-                                </div>
-                            </button>
+                                </button>)
+                            }
                         </div>
                     </form>
                 </>
             }
-            {/* <h2>Your Score is {score} </h2> */}
 
         </div>
     )
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label>First Name</label>
-            <input {...register("firstName")} />
-            <label>Last Name</label>
-            <input {...register("lastName")} />
-            <label>Username</label>
-            <input {...register("username")} />
-            <input type="submit" />
-            <button
-                type="button"
-                onClick={() => {
-                    alert(JSON.stringify(getValues()));
-                }}
-            >
-                Alert All Values
-            </button>
-            <button
-                type="button"
-                onClick={() => {
-                    alert(JSON.stringify(getValues("firstName")));
-                }}
-            >
-                Alert First Name
-            </button>
-            <button
-                type="button"
-                onClick={() => {
-                    alert(JSON.stringify(getValues(["firstName", "lastName"])));
-                }}
-            >
-                Alert First & Last Name
-            </button>
-        </form>
-    );
 };
