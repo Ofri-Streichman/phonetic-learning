@@ -59,38 +59,6 @@ button:active {
   transform: translateY(1px);
 }
 
-#contact h1 {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-#contact h1 form {
-  display: flex;
-  align-items: center;
-  margin-top: 0.25rem;
-}
-
-#contact h1 form button {
-  box-shadow: none;
-  font-size: 1.5rem;
-  font-weight: 400;
-  padding: 0;
-}
-
-#contact h1 form button[value="true"] {
-  color: #a4a4a4;
-}
-
-#contact h1 form button[value="true"]:hover,
-#contact h1 form button[value="false"] {
-  color: #eeb004;
-}
-
-form[action$="destroy"] button {
-  color: #f44250;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -496,7 +464,7 @@ i {
 
 .test-container {
   margin: 2rem;
-  gap:1rem 2rem;
+  gap: 1rem 2rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
 }
@@ -509,12 +477,12 @@ a,
 .undraggable {
   text-decoration: none;
   user-select: none;
-  color: black
+  color: black;
 }
 
 .Submit-button {
   margin: 1rem;
-  background-color: #3992ff;
+  background: linear-gradient(to right, #3494e6, #ec6ead);
   color: white;
 }
 
@@ -530,8 +498,8 @@ a,
   width: 100%;
 }
 
-.page>h1,
-.page>h2 {
+.page > h1,
+.page > h2 {
   margin: 1rem 2rem 0rem;
   /* font-size: 2.5rem; */
   margin-bottom: 0;
@@ -547,13 +515,13 @@ a,
   background-color: #6eed44b7;
 }
 
-.start-button-wrapper{
+.start-button-wrapper {
   width: 100%;
   /* display: flex; */
   /* justify-content: center; */
   margin: 2rem;
 }
-.start-button-wrapper>button{
+.start-button-wrapper > button {
   height: 4rem;
   width: 8rem;
   margin: 0;
@@ -577,13 +545,12 @@ a,
   position: relative;
 }
 
-
-/* p {
+.home-page p {
   font-size: 1.2em;
   line-height: 1.6;
-} */
+}
 
-.start-button-home {
+/* .start-button-home {
   padding: 10px 20px;
   font-size: 1.2em;
   background: #ffce00;
@@ -592,24 +559,66 @@ a,
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
-}
+} */
 
 .floating-letters {
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 10px;
+  font-size: 2em;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0px;
+  height: 100vh;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
+  color: white;
+  overflow: hidden;
 }
 
 .floating-letters span {
-  display: inline-block;
-  font-size: 2em;
   position: absolute;
+  left: calc((var(--init-x) * 1vw) - (12rem));
+  top: calc(var(--init-y) * 1vh);
+  animation: float 10s infinite linear;
 }
 
+@keyframes float {
+  0% {
+    /* translate: (calc(var(--init-x)*50vw), calc(var(--init-y)*50vw)) ; */
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
+    /* translate: calc(var(--x) * 1vw) calc(var(--y) * 1vh); */
+  }
+  /* 25% {
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 2);
+    translate: calc(var(--x) * 2vw) calc(var(--y) * 2vh);
+  } */
+  50%{
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
+    translate: calc(var(--x) * 4vw) calc(var(--y) * 4vh);
 
+  }
+  100% {
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
+    /* translate: calc(var(--x) * 1vw) calc(var(--y) * 1vh); */
+  }
+}
 
+/* @keyframes float {
+  0% {
+    translate: (calc(var(--init-x)*50vw), calc(var(--init-y)*50vw)) ;
+    rotate: (calc(var(--turnDegree)*1deg));
 
+  }
+  25%{
+        rotate: (calc(var(--turnDegree)*1deg));
+  }
+  50%{
+    transform: translate(
+      calc(var(--x) * 1vw),
+      calc(var(--y) * 1vh))
+    rotate(calc(var(--turnDegree)*1deg));
+  }
+  100% {
+    translate: (calc(var(--init-x)*50vw), calc(var(--init-y)*50vw)) ;
+    rotate: (calc(var(--turnDegree)*1deg));
+  }
+} */

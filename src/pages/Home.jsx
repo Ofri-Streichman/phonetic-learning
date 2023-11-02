@@ -1,80 +1,55 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const HomePage = () => {
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    useEffect(() => {
-        const floatingLetters = document.querySelectorAll('.floating-letters span');
+    const getRandomValue = () => (Math.random() - 0.5) * 100;
+    const getRandomFraction = () => Math.random();
+    const getRandomDegree = () => (Math.random() - 0.5) * 180;
 
-        const moveLetters = () => {
-            floatingLetters.forEach(letter => {
-                const x = Math.random() * window.innerWidth;
-                const y = Math.random() * window.innerHeight;
-                letter.style.left = x + 'px';
-                letter.style.top = y + 'px';
-                moveElement(letter);
-            });
-        };
+    const randCircle = () => {
+        if (Math.random()<0.5){
+            return (Math.random()*20+10)
+        }
+        return (Math.random() * 20 + 70)
+    }
 
-        const moveElement = (element) => {
-            let stepX = Math.random() - 0.4;
-            let stepY = Math.random() - 0.4;
+    function getRandomCoordinates() {
+        const angle = Math.random() * Math.PI * 2; // Random angle in radians
+        const innerRadius = 40; // Inner radius of the ring
+        const outerRadius = 50; // Outer radius of the ring
 
-            let x = parseFloat(element.style.left);
-            let y = parseFloat(element.style.top);
+        // Generate coordinates for a ring
+        const x = Math.cos(angle) * (innerRadius + Math.random() * (outerRadius - innerRadius));
+        const y = Math.sin(angle) * (innerRadius + Math.random() * (outerRadius - innerRadius));
 
-            const maxX = window.innerWidth - element.clientWidth - document.getElementById("sidebar").clientWidth;
-            const maxY = window.innerHeight - element.clientHeight - document.getElementById("sidebar").clientHeight;
+        // Adjust for rectangle positioning (100x100 size)
+        const rectWidth = 100;
+        const rectHeight = 100;
 
-            console.log("document.getElementById('sidebar').clientWidth ", document.getElementById("sidebar").clientWidth)
-            const minX = document.getElementById("sidebar").clientWidth;
-            const minY = document.getElementById("sidebar").clientWidth;
+        const adjustedX = rectWidth / 2 + x;
+        const adjustedY = rectHeight / 2 + y;
 
-            const move = () => {
-                x += stepX;
-                y += stepY;
-
-                if (x < minX || x > maxX) {
-                    stepX *= -1;
-                }
-                if (y < minY || y > maxY) {
-                    stepY *= -1;
-                }
-
-                element.style.left = x + 'px';
-                element.style.top = y + 'px';
-
-                requestAnimationFrame(move);
-            };
-            move();
-        };
-
-        moveLetters();
-
-        return () => {
-            // Cleanup
-            floatingLetters.forEach(letter => {
-                cancelAnimationFrame(moveElement);
-            });
-        };
-    }, []);
+        return adjustedX;
+    }
 
     return (
-        <div className="page">
+        <div className="home-page page">
             <div className="hero-section">
                 <div className="hero-content">
                     <h1>Welcome to Phonetic Alphabet Mastery</h1>
                     <p>Unlock the power of clear communication with letter-word pairs!</p>
                     <p>Discover the art of precise communication through the phonetic alphabet - an essential tool used across various industries.</p>
-                    <a className="start-button-home" href='/study'>Let's Start</a>
-                    <div className="floating-letters">
-                        {letters.split('').map((letter, index) => (
-                            <span key={index}>
-                                {letter}
-                            </span>
-                        ))}
-                    </div>
+                    <button className="start-button">Let's Start</button>
+                    
                 </div>
+            </div>
+            <div className="floating-letters">
+                {letters.split('').map((letter, index) => (
+                    <span key={index} style={{ '--x': getRandomValue(), '--y': getRandomValue(), '--init-x': getRandomCoordinates(), '--init-y': getRandomCoordinates(), '--turnDegree': getRandomDegree() }}>
+                        {letter}
+                    </span>
+                ))}
             </div>
         </div>
     );
