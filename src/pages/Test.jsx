@@ -149,7 +149,7 @@
 
 // }
 
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import React, { useState } from 'react';
 import Card from "../components/Test-card";
 import shortid, { generate } from 'shortid';
@@ -179,6 +179,7 @@ export default function Test() {
             };
         }, {})
     });
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const [visualQues, setVisualQues] = useState({
         ...shuffled.reduce((obj, item) => {
             return {
@@ -190,7 +191,7 @@ export default function Test() {
     console.log(visualQues)
 
     const onSubmit = async (formData) => {
-        // OFRI WAS HERE
+        setIsSubmitted(true)
         let Q = { ...formData }
         for (let field of Object.keys(formData)){
             let fieldCorrect = await checkanswer(field, formData[field]) ? "correct" : "incorrect";
@@ -244,7 +245,7 @@ export default function Test() {
                             <label htmlFor={letter}><h2>{letter}</h2></label>
                             <div className="CardInput">
                                 {/* <label>{letter}</label> */}
-                                <input {...register(letter)} />
+                                <input disabled={isSubmitted} {...register(letter)} />
                             </div>
                         </div>
                     )}
