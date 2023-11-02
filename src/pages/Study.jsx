@@ -8,7 +8,7 @@ function Study() {
     return (
         <div id="study-page" className="page">
             <h1>Study Page</h1>
-            <p>Hover over any card to reveal it's NATO phonetic alphabet encryption</p>
+            <p>Hover over any card to reveal it's NATO phonetic alphabet encryption.</p>
             <div className="study-container">
                 {phonetic_array.map((x) => <Card key={shortid.generate()} letter={x.letter} word={x.word} />)}
             </div>
