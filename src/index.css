@@ -1,5 +1,7 @@
 html {
   box-sizing: border-box;
+  --gradientColour: linear-gradient(to right, #3494e6, #ec6ead);
+  --transparentGradientColour: linear-gradient(to right, #3493e6b6, #ec6eadc4);
 }
 
 *,
@@ -151,7 +153,7 @@ i {
 }
 
 #sidebar nav a.active {
-  background: hsl(224, 98%, 58%);
+  background: var(--gradientColour);
   color: white;
 }
 
@@ -256,7 +258,7 @@ i {
 
 .flip-card-back {
   /* background-color: #6eed44b7; */
-  background: linear-gradient(to right, #3494e6, #ec6ead);
+  background: var(--gradientColour);
   color: white;
   transform: rotateY(180deg);
 }
@@ -327,12 +329,12 @@ a,
 
 .Submit-button {
   margin: 1rem;
-  background: linear-gradient(to right, #3494e6, #ec6ead);
+  background: var(--gradientColour);
   color: white;
 }
 
 .Submit-button:hover {
-  background: linear-gradient(to right, #3493e6b6, #ec6eadc4);
+  background: var(--transparentGradientColour);
   font-weight: 500;
   transform: translateY(1px);
 }
@@ -351,7 +353,7 @@ a,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #3494e6, #ec6ead);
+  background: var(--gradientColour);
   color: #fff;
   text-align: center;
   height: 100%;

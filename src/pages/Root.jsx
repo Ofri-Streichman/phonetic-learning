@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
-export async function loader() {
-    return [{ name: "hello" }];
-}
+const pages = [
+    { pageName: "Home", path: "/" },
+    { pageName: "Study", path: "/study" },
+    { pageName: "Practice", path: "/practice" },
+    { pageName: "Test", path: "/test" },
+]
 
 export default function Root() {
+    let location = useLocation().pathname;
     return (
         <>
             <div id="sidebar">
                 <h2 className='undraggable'><a href='/'><MenuBookIcon /> Phonetix</a></h2>
                 <nav>
                     <ul>
-                        <li>
-                            <a className="navbar-link" href='/'>Home</a>
-                        </li>
-                        <li>
-                            <a className="navbar-link" href='/study'>Study</a>
-                        </li>
-                        <li>
-                            <a className="navbar-link" href='/practice' >Practice</a>
-                        </li>
-                        <li>
-                            <a className="navbar-link" href='/test' >Test Yourself</a>
-                        </li>
+                        {pages.map(({ pageName, path }) =>
+                            <li>
+                                <a
+                                    href={path}
+                                    className={(location === path) ? "navbar-link active" : "navbar-link"}
+                                >
+                                    {pageName}
+                                </a>
+                            </li>
+                        )}
                     </ul>
                 </nav>
 
