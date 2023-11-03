@@ -21,7 +21,7 @@ export default function LetterCard(props) {
         <h2>{props.text}</h2>
 
         <div className="CardInput">
-            <form method="post" onSubmit={handleSubmit} autocomplete="off">
+            <form method="post" onSubmit={handleSubmit} autoComplete="off">
                 <label>
                     <input name="userInput" id="userInput" />
                 </label>

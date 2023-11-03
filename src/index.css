@@ -2,6 +2,10 @@ html {
   box-sizing: border-box;
   --gradientColour: linear-gradient(to right, #3494e6, #ec6ead);
   --transparentGradientColour: linear-gradient(to right, #3493e6b6, #ec6eadc4);
+  --correct: #ec6eadc4;
+  /* --correct: #6eed44b7; */
+  --correct: linear-gradient(to right, #3493e66e, #ec6ead85);
+
 }
 
 *,
@@ -206,7 +210,7 @@ i {
 }
 
 .Card.correct {
-  background-color: #6eed44b7;
+  background: var(--correct);
 }
 
 .Card.incorrect {
@@ -257,7 +261,6 @@ i {
 }
 
 .flip-card-back {
-  /* background-color: #6eed44b7; */
   background: var(--gradientColour);
   color: white;
   transform: rotateY(180deg);
@@ -310,7 +313,7 @@ a,
 }
 
 .correct {
-  background-color: #6eed44b7;
+  background: var(--correct);
 }
 
 .start-button-wrapper {

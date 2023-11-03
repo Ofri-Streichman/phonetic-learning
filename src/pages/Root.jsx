@@ -11,6 +11,7 @@ const pages = [
 
 export default function Root() {
     let location = useLocation().pathname;
+    const[soundOn, setSoundOn]= useState(true);
     return (
         <>
             <div id="sidebar">
@@ -31,7 +32,7 @@ export default function Root() {
                 </nav>
 
             </div>
-            <Outlet />
+            <Outlet soundOn={soundOn} />
         </>
     );
 }
