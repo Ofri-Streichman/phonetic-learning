@@ -415,13 +415,25 @@ a,
 
 @keyframes float {
   0% {
+    transform: rotate(calc(var(--turnDegree) * 1deg));
+  }
+
+  50% {
+    transform: rotate(calc(var(--turnDegree) * 4deg)) translate(calc(var(--x) * 4vw), calc(var(--y) * 4vh));
+  }
+  100% {
+    transform: rotate(calc(var(--turnDegree) * 1deg));
+  }
+}
+
+/* @keyframes float {
+  0% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
 
   50% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
-    left: calc(var(--x) * 4vw);
-    top: calc(var(--y) * 4vh);
+    translate: calc(var(--x) * 4vw) calc(var(--y) * 4vh);
   }
   100% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
@@ -440,7 +452,7 @@ a,
   100% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
-}
+} */
 
 #mobile-header {
   display: none;
