@@ -435,7 +435,7 @@ a,
 
   50% {
     -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
-    -webkit-translate: calc(var(--x) * 4vw) calc(var(--y) * 4vh);
+    -webkit-transform: translate(calc(var(--x) * 4vw) calc(var(--y) * 4vh));
   }
   100% {
     -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
