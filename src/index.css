@@ -411,26 +411,34 @@ a,
   position: absolute;
   left: calc((var(--init-x) * 1vw) - (12rem));
   top: calc(var(--init-y) * 1vh);
-  /* animation: float 10s infinite linear; */
+  animation: float 10s infinite linear;
 }
 
 @keyframes float {
   0% {
-    /* translate: (calc(var(--init-x)*50vw), calc(var(--init-y)*50vw)) ; */
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
-    /* translate: calc(var(--x) * 1vw) calc(var(--y) * 1vh); */
   }
-  /* 25% {
-    rotate: calc(calc(var(--turnDegree) * 1deg) * 2);
-    translate: calc(var(--x) * 2vw) calc(var(--y) * 2vh);
-  } */
+
   50% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
-    transform: translate(calc(var(--x) * 4vw) calc(var(--y) * 4vh));
+    translate: calc(var(--x) * 4vw) calc(var(--y) * 4vh);
   }
   100% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
-    /* translate: calc(var(--x) * 1vw) calc(var(--y) * 1vh); */
+  }
+}
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
+  }
+
+  50% {
+    -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
+    -webkit-translate: calc(var(--x) * 4vw) calc(var(--y) * 4vh);
+  }
+  100% {
+    -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
 }
 
