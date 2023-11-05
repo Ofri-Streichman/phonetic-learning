@@ -7,23 +7,23 @@ const HomePage = () => {
     const getRandomFraction = () => Math.random();
     const getRandomDegree = () => (Math.random() - 0.5) * 180;
 
-    // const [deviceType, setDeviceType] = useState("");
+    const [deviceType, setDeviceType] = useState("");
 
-    // useEffect(() => {
-    //     if (
-    //         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(
-    //             navigator.userAgent
-    //         )
-    //     ) {
-    //         setDeviceType("Mobile");
-    //         Array.from(document.getElementsByClassName("floating-letter")).forEach((el) => {
-    //             el.style.animation = 'float 10s infinite linear';
-    //         });
+    useEffect(() => {
+        if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(
+                navigator.userAgent
+            )
+        ) {
+            setDeviceType("Mobile");
+            Array.from(document.getElementsByClassName("floating-letter")).forEach((el) => {
+                el.style.animation = 'float 10s infinite linear';
+            });
 
-    //     } else {
-    //         setDeviceType("Desktop");
-    //     }
-    // }, []);
+        } else {
+            setDeviceType("Desktop");
+        }
+    }, []);
 
 
     function getRandomCoordinates() {
