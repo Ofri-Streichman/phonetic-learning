@@ -236,7 +236,6 @@ i {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  
 }
 
 .flip-card:hover .flip-card-inner {
@@ -255,7 +254,7 @@ i {
   align-items: center;
 }
 
-.flip-card-front{
+.flip-card-front {
   background-color: #e3e3e3;
 }
 
@@ -430,15 +429,15 @@ a,
 
 @-webkit-keyframes float {
   0% {
-    -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
 
   50% {
-    -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
     -webkit-transform: translate(calc(var(--x) * 4vw) calc(var(--y) * 4vh));
   }
   100% {
-    -webkit-rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
+    rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
 }
 
@@ -573,5 +572,9 @@ a,
   .page > p {
     font-size: 1.5rem;
     font-weight: 600;
+  }
+
+  .floating-letters span {
+    -webkit-animation: float 2s infinite linear;
   }
 }
