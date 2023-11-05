@@ -420,7 +420,8 @@ a,
 
   50% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 4);
-    translate: calc(var(--x) * 4vw) calc(var(--y) * 4vh);
+    left: calc(var(--x) * 4vw);
+    top: calc(var(--y) * 4vh);
   }
   100% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
