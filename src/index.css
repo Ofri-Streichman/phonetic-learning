@@ -411,7 +411,7 @@ a,
   position: absolute;
   left: calc((var(--init-x) * 1vw) - (12rem));
   top: calc(var(--init-y) * 1vh);
-  animation: float 10s infinite linear;
+  /* animation: float 10s infinite linear; */
 }
 
 @keyframes float {
@@ -546,15 +546,6 @@ a,
     grid-template-columns: repeat(3, auto);
     gap: 1rem;
   }
-
-  .flip-card:focus .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-
-  /* .test-container > .Crad{
-    width: 30vw;
-    height: 20vh;
-  } */
 
   .test-container {
     gap: 1rem 2rem;
