@@ -3,7 +3,7 @@ import Card from "../components/Practice-card"
 import phonetic_alphabet from "../phonetic_alphabet.json";
 import useSound from 'use-sound';
 import correct from '../sounds/correct.mp3';
-import incorrect from '../sounds/correct.mp3';
+import incorrect from '../sounds/incorrect.mp3';
 
 
 function Practice({ soundOn }) {
