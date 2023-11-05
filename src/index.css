@@ -415,19 +415,6 @@ a,
 
 @keyframes float {
   0% {
-    transform: rotate(calc(var(--turnDegree) * 1deg));
-  }
-
-  50% {
-    transform: rotate(calc(var(--turnDegree) * 4deg)) translate(calc(var(--x) * 4vw), calc(var(--y) * 4vh));
-  }
-  100% {
-    transform: rotate(calc(var(--turnDegree) * 1deg));
-  }
-}
-
-/* @keyframes float {
-  0% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
 
@@ -452,7 +439,7 @@ a,
   100% {
     rotate: calc(calc(var(--turnDegree) * 1deg) * 1);
   }
-} */
+}
 
 #mobile-header {
   display: none;
@@ -588,6 +575,6 @@ a,
   }
 
   .floating-letters span {
-    -webkit-animation: float 2s infinite linear;
+    -webkit-animation: float 10s infinite linear;
   }
 }

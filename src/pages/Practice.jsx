@@ -23,8 +23,6 @@ function Practice() {
     }
 
     async function checkInput(userInput) {
-        console.log(userInput);
-        console.log(current.word);
 
         if (userInput.toLowerCase() === current.word.toLowerCase()) {
             setVisualQue('correct');

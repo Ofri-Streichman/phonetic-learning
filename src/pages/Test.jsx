@@ -11,7 +11,6 @@ let alphabet = phonetic_alphabet.dictionary;
 export default function Test() {
 
     const shuffle = () => {
-        console.log("RESHUFFLED!");
         return alphabet.sort(() => 0.5 - Math.random()).slice(0, 11);
     }
 
