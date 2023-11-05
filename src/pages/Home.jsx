@@ -7,12 +7,6 @@ const HomePage = () => {
     const getRandomFraction = () => Math.random();
     const getRandomDegree = () => (Math.random() - 0.5) * 180;
 
-    const randCircle = () => {
-        if (Math.random()<0.5){
-            return (Math.random()*20+10)
-        }
-        return (Math.random() * 20 + 70)
-    }
 
     function getRandomCoordinates() {
         const angle = Math.random() * Math.PI * 2; // Random angle in radians

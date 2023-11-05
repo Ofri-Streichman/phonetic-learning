@@ -4,6 +4,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
 import { Outlet, useLocation } from "react-router-dom";
 import shortid from 'shortid';
+import Header from '../components/Header'
 
 const pages = [
     { pageName: "Home", path: "/" },
@@ -15,9 +16,22 @@ const pages = [
 export default function Root() {
     let location = useLocation().pathname;
     const [soundOn, setSoundOn] = useState(true);
+
+    function openNav() {
+        document.getElementById("sidebar").style.display = "block";
+        document.getElementById("sidebar-open-button").style.display = "none";
+    }
+
+    function closeNav() {
+        document.getElementById("sidebar").style.display = "none";
+        document.getElementById("sidebar-open-button").style.display = "block";
+    }
+
+
     return (
         <>
             <div id="sidebar">
+                <a className="closebtn" onClick={closeNav}>×</a>
                 <h2 className='undraggable'><a href='/'><MenuBookIcon /> Phonetix</a></h2>
                 <nav>
                     <ul>
@@ -45,6 +59,7 @@ export default function Root() {
             </div>
             <Outlet context={[soundOn, setSoundOn]} />
             {/* <Outlet soundOn={soundOn} /> */}
+            <Header openNav={openNav} logoColour={(location === "/" ? "white" : "black")} />
 
         </>
     );
