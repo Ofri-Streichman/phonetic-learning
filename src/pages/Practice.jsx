@@ -4,9 +4,11 @@ import phonetic_alphabet from "../phonetic_alphabet.json";
 import useSound from 'use-sound';
 import correct from '../sounds/correct.mp3';
 import incorrect from '../sounds/incorrect.mp3';
+import { useOutletContext } from "react-router-dom";
 
 
-function Practice({ soundOn }) {
+function Practice() {
+    const [soundOn] = useOutletContext();
     let alphabet = phonetic_alphabet.dictionary;
     const [current, setCurrent] = useState(randLetter());
     const [score, setScore] = useState(0);
@@ -26,11 +28,11 @@ function Practice({ soundOn }) {
 
         if (userInput.toLowerCase() === current.word.toLowerCase()) {
             setVisualQue('correct');
-            correctAudio();
+            if (soundOn) correctAudio();
             setScore(score + 10);
         } else {
             setVisualQue('incorrect');
-            incorrectAudio();
+            if (soundOn) incorrectAudio();
         }
         setText(current.word)
         await new Promise(r => setTimeout(r, 700));

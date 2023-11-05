@@ -1,7 +1,7 @@
 //   // "Studypage": "http://ofri-streichman.github.io/phonetic-learning",
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";

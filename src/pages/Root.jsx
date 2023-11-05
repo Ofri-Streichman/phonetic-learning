@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
 import { Outlet, useLocation } from "react-router-dom";
+import shortid from 'shortid';
 
 const pages = [
     { pageName: "Home", path: "/" },
@@ -11,7 +14,7 @@ const pages = [
 
 export default function Root() {
     let location = useLocation().pathname;
-    const[soundOn, setSoundOn]= useState(true);
+    const [soundOn, setSoundOn] = useState(true);
     return (
         <>
             <div id="sidebar">
@@ -19,7 +22,8 @@ export default function Root() {
                 <nav>
                     <ul>
                         {pages.map(({ pageName, path }) =>
-                            <li>
+                            < li
+                                key={shortid.generate()}>
                                 <a
                                     href={path}
                                     className={(location === path) ? "navbar-link active" : "navbar-link"}
@@ -29,10 +33,19 @@ export default function Root() {
                             </li>
                         )}
                     </ul>
+                    <div id="soundOn-button">
+                        <a onClick={() => setSoundOn(!soundOn)}>
+                            {soundOn ?
+                                (<VolumeUpIcon />) :
+                                (<VolumeMuteIcon />)}
+                        </a>
+                    </div>
                 </nav>
 
             </div>
-            <Outlet soundOn={soundOn} />
+            <Outlet context={[soundOn, setSoundOn]} />
+            {/* <Outlet soundOn={soundOn} /> */}
+
         </>
     );
 }
