@@ -27,11 +27,15 @@ export default function Root() {
         document.getElementById("sidebar-open-button").style.display = "block";
     }
 
+    function toggleSidebar() {
+        document.querySelector('#sidebar').classList.toggle('opened');
+    }
+
 
     return (
         <>
             <div id="sidebar">
-                <a className="closebtn" onClick={closeNav}>×</a>
+                <a className="closebtn" onClick={toggleSidebar}>×</a>
                 <h2 className='undraggable'><a href='/'><MenuBookIcon /> Phonetix</a></h2>
                 <nav>
                     <ul>
@@ -59,7 +63,7 @@ export default function Root() {
             </div>
             <Outlet context={[soundOn, setSoundOn]} />
             {/* <Outlet soundOn={soundOn} /> */}
-            <Header openNav={openNav} logoColour={(location === "/" ? "white" : "black")} />
+            <Header openNav={toggleSidebar} logoColour={(location === "/" ? "white" : "black")} />
 
         </>
     );
