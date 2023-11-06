@@ -35,8 +35,10 @@ export default function Root() {
     return (
         <>
             <div id="sidebar">
-                <a className="closebtn" onClick={toggleSidebar}>×</a>
-                <h2 className='undraggable'><a href='/'><MenuBookIcon /> Phonetix</a></h2>
+                <div className='closebtn-and-logo'>
+                    <h2 className='undraggable'><a href='/'><MenuBookIcon /> Phonetix</a></h2>
+                    <a className="closebtn" onClick={toggleSidebar}><p>×</p></a>
+                </div>
                 <nav>
                     <ul>
                         {pages.map(({ pageName, path }) =>

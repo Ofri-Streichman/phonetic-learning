@@ -449,15 +449,23 @@ a,
   display: none;
 }
 
+.closebtn-and-logo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vw;
+}
+
+#sidebar-open-button{
+  display: none;
+}
+
 @media (pointer: none), (pointer: coarse), (max-width: 768px) {
   /* For mobile phones: */
   #sidebar {
     flex: 0 0 40vw;
     flex-direction: column;
-    backdrop-filter: blur(30px) saturate(2);
-    -webkit-backdrop-filter: blur(30px) saturate(2);
-    padding-inline: 0;
-    padding-block: 13px;
+    
     overflow-y: auto;
     overflow-x: hidden;
     transition: 1.5s cubic-bezier(0.36, -0.01, 0, 0.77);
@@ -481,16 +489,20 @@ a,
   }
 
   #sidebar .closebtn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
     font-weight: 900;
     font-size: 1.5rem;
     background: rgb(228, 228, 228);
     color: #000000;
-    padding-bottom: 0.5rem;
     border-radius: 25px;
+  }
+  .closebtn p{
+    margin: 0;
+    margin-bottom: 5px;
   }
 
   .navbar-link {
